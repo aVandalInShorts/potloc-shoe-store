@@ -4,6 +4,7 @@ import "./globals.css";
 
 import { i18n } from "../i18n/i18n";
 import Header from "../views/Header/Header";
+import StoreProvider from "@/store/Store";
 
 const roboto = Roboto({
 	subsets: ["latin"],
@@ -25,11 +26,19 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	const ws = new WebSocket("ws://localhost:8080/");
+
+	ws.onmessage = (event) => {
+		console.log(event.data);
+	};
+
 	return (
 		<html lang={i18n.locale()}>
 			<body className={roboto.className}>
-				<Header />
-				{children}
+				<StoreProvider>
+					<Header />
+					{children}
+				</StoreProvider>
 			</body>
 		</html>
 	);

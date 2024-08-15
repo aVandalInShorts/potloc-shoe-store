@@ -19,7 +19,6 @@ export default function Hero(props: {
 		// The animation will start after the component is mounted
 		// to prevent the animation from starting during loading
 		setAnimStart(true);
-		console.log("sasas");
 	}, []);
 
 	return (

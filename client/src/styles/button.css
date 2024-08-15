@@ -47,7 +47,7 @@
 		background-color: var(--button-primary);
 		color: var(--color-white);
 		clip-path: ellipse(0% 0% at 50% 50%);
-		transition: clip-path 300ms ease-in-out;
+		transition: clip-path 500ms ease-in-out;
 	}
 
 	&:hover {
