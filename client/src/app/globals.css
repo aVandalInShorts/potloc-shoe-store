@@ -91,6 +91,9 @@
 	--site-padding-wide: 90px;
 	--site-padding: var(--site-padding-mobile);
 
+	--content-width: 920px;
+	--content-width-narrow: 80ch;
+
 	--header-height: 45px;
 }
 
