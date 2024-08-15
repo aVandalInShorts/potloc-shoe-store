@@ -1,0 +1,32 @@
+.header {
+}
+
+.ctn {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px var(--site-padding);
+}
+
+.logo {
+	display: inline-block;
+	width: min(100%, 125px);
+}
+
+.nav {
+	& a {
+		display: inline-block;
+		padding: 5px 10px;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.header,
+	.ctn {
+		height: var(--header-height);
+	}
+
+	.ctn {
+		position: fixed;
+		inset: 0 0 auto;
+	}
+}
