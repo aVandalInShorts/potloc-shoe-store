@@ -1,0 +1,27 @@
+.section {
+	display: grid;
+	grid-template-columns:
+		[full-start]
+		var(--site-padding)
+		[full-padding-start]
+		auto
+		[content-start]
+		calc(calc(var(--content-width) - var(--content-width-narrow)) / 2)
+		[content-narrow-start]
+		var(--content-width-narrow)
+		[content-narrow-end]
+		calc(calc(var(--content-width) - var(--content-width-narrow)) / 2)
+		[content-end]
+		auto
+		[full-padding-end]
+		var(--site-padding)
+		[full-end];
+}
+
+.section-content {
+	grid-column: content-start / content-end;
+}
+
+.section-content-narrow {
+	grid-column: content-narrow-start / content-narrow-end;
+}

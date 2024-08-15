@@ -1,0 +1,58 @@
+.button {
+	--button-primary: var(--color-green);
+
+	position: relative;
+	padding: 10px 20px;
+	border: 1px solid var(--button-primary);
+	border-radius: 30px;
+	font-size: 16px;
+	font-weight: 600;
+	color: var(--button-primary);
+	text-align: center;
+	max-width: max(100%, 200px);
+
+	&.button-green {
+		--button-primary: var(--color-green);
+	}
+
+	&.button-lime {
+		--button-primary: var(--color-lime);
+	}
+
+	&.button-orange {
+		--button-primary: var(--color-orange);
+	}
+
+	&.button-white {
+		--button-primary: var(--color-white);
+	}
+
+	&.button-black {
+		--button-primary: var(--color-black);
+	}
+
+	&,
+	&:after {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 30px;
+	}
+
+	&:after {
+		content: attr(data-text);
+		position: absolute;
+		inset: 0;
+		border: 1px solid var(--button-primary);
+		background-color: var(--button-primary);
+		color: var(--color-white);
+		clip-path: ellipse(0% 0% at 50% 50%);
+		transition: clip-path 300ms ease-in-out;
+	}
+
+	&:hover {
+		&:after {
+			clip-path: ellipse(200px 200px at 50% 50%);
+		}
+	}
+}

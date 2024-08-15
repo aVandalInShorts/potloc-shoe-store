@@ -1,5 +1,76 @@
 .hero {
+	--hero-animation-logo-duration: 2.5s;
+	--hero-animation-stagger: 1s;
+	--hero-elements-opacity: 0;
+	padding-block: 50px;
+
+	&[class*="anim-start"] {
+		--hero-elements-opacity: 1;
+		& .logo {
+			animation: logo-slide-in var(--hero-animation-logo-duration) ease-in-out
+				0s 1 forwards;
+		}
+	}
+}
+
+.hero-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
 }
 
 .logo {
+	width: min(100%, 300px);
+	opacity: 0;
+}
+
+.main-title,
+.other-title,
+.btns {
+	opacity: var(--hero-elements-opacity);
+	transition: opacity var(--hero-animation-stagger);
+}
+
+.main-title {
+	margin-top: 40px;
+	font-size: 42px;
+	transition-delay: calc(
+		var(--hero-animation-logo-duration) + var(--hero-animation-stagger)
+	);
+}
+
+.other-title {
+	margin-top: 30px;
+	font-size: 24px;
+	transition-delay: calc(
+		var(--hero-animation-logo-duration) + var(--hero-animation-stagger) * 2
+	);
+}
+
+.btns {
+	display: flex;
+	gap: 10px;
+	padding-block-start: 40px;
+	transition-delay: calc(
+		var(--hero-animation-logo-duration) + var(--hero-animation-stagger) * 3
+	);
+}
+
+@keyframes logo-slide-in {
+	0% {
+		translate: 0 200px;
+		opacity: 0;
+	}
+	40% {
+		opacity: 0;
+	}
+	70% {
+		translate: 0 200px;
+		opacity: 1;
+	}
+	100% {
+		translate: 0 0px;
+		opacity: 1;
+	}
 }
