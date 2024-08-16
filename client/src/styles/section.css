@@ -8,7 +8,7 @@
 		[content-start]
 		calc(calc(var(--content-width) - var(--content-width-narrow)) / 2)
 		[content-narrow-start]
-		min(100%, var(--content-width-narrow))
+		var(--content-width-narrow)
 		[content-narrow-end]
 		calc(calc(var(--content-width) - var(--content-width-narrow)) / 2)
 		[content-end]

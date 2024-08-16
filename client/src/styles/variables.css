@@ -13,14 +13,16 @@
 	--site-padding-wide: 90px;
 	--site-padding: var(--site-padding-mobile);
 
-	--content-width-mobile: calc(100vw - 2 * var(--site-padding-mobile));
+	--content-width-mobile: calc(
+		calc(100vw - (100vw - 100%)) - 2 * var(--site-padding-mobile)
+	);
 	--content-width-desktop: 920px;
 	--content-width-desktop-narrow: 80ch;
 
 	--content-width: var(--content-width-mobile);
 	--content-width-narrow: var(--content-width-mobile);
 
-	--header-height: 45px;
+	--header-height: 54px;
 }
 
 @media (prefers-color-scheme: dark) {
