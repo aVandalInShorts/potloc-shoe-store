@@ -1,0 +1,13 @@
+.list-section {
+	padding-block: 20px;
+}
+
+.list {
+	margin-top: 40px;
+}
+
+@media screen and (min-width: 1024px) {
+	.list-section {
+		padding-block: 50px;
+	}
+}

@@ -42,6 +42,10 @@
 	#__next {
 		isolation: isolate;
 	}
+
+	button {
+		background: none;
+	}
 }
 
 @layer default {

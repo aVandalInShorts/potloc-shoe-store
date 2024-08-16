@@ -26,12 +26,6 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	const ws = new WebSocket("ws://localhost:8080/");
-
-	ws.onmessage = (event) => {
-		console.log(event.data);
-	};
-
 	return (
 		<html lang={i18n.locale()}>
 			<body className={roboto.className}>

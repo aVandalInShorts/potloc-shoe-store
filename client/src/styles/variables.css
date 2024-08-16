@@ -13,8 +13,12 @@
 	--site-padding-wide: 90px;
 	--site-padding: var(--site-padding-mobile);
 
-	--content-width: 920px;
-	--content-width-narrow: 80ch;
+	--content-width-mobile: calc(100vw - 2 * var(--site-padding-mobile));
+	--content-width-desktop: 920px;
+	--content-width-desktop-narrow: 80ch;
+
+	--content-width: var(--content-width-mobile);
+	--content-width-narrow: var(--content-width-mobile);
 
 	--header-height: 45px;
 }
@@ -26,9 +30,11 @@
 	}
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1024px) {
 	:root {
 		--site-padding: var(--site-padding-normal);
+		--content-width: var(--content-width-desktop);
+		--content-width-narrow: var(--content-width-desktop-narrow);
 	}
 }
 

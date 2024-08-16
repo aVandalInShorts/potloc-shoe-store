@@ -10,6 +10,7 @@
 	color: var(--button-primary);
 	text-align: center;
 	max-width: max(100%, 200px);
+	cursor: pointer;
 
 	&.button-green {
 		--button-primary: var(--color-green);

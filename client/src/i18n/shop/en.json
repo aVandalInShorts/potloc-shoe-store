@@ -1,0 +1,11 @@
+[
+	{
+		"SHOP": {
+			"TITLE": "SHOP",
+			"ITEMS": {
+				"SHOPS-LIST": "Shops list",
+				"ADD-TO-CART": "Add to cart"
+			}
+		}
+	}
+]

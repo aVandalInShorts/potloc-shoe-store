@@ -1,38 +1,60 @@
 "use client";
 
-import { createContext, useContext, useReducer } from "react";
+import React, { createContext, useContext, useReducer } from "react";
+import WS from "./WS";
 
-interface State {
-	inventory: Product[];
+interface StoreStateInterface {
+	inventory: StoreProductInterface[];
 }
 
-interface Product {
-	name: string;
-	quantity: number;
+export interface StoreProductInterface {
+	store: string;
+	model: string;
+	inventory: number;
 }
 
-interface Action {
-	type: string;
-	payload: any;
+export enum StoreActionTypesEnum {
+	SET_PRODUCT = "SET_PRODUCT",
 }
 
-function storeReducer(state: State, action: Action): State {
-	switch (action.type) {
-		case "SET_PRODUCT":
-			const newInventory = { ...state.inventory };
-			if (newInventory[action.payload.name]) {
-				newInventory[action.payload.name].quantity = action.payload.quantity;
-			} else {
-				newInventory[action.payload.name] = action.payload;
-			}
+interface SetProductAction {
+	type: StoreActionTypesEnum.SET_PRODUCT;
+	payload: StoreProductInterface;
+}
 
-			return { ...state, inventory: newInventory };
-		default:
-			return state;
+type StoreActionType = SetProductAction;
+
+interface StoreContextInterface {
+	state: StoreStateInterface;
+	dispatch: React.Dispatch<StoreActionType>;
+}
+
+function storeReducer(
+	state: StoreStateInterface,
+	action: StoreActionType
+): StoreStateInterface {
+	if (action.type === StoreActionTypesEnum.SET_PRODUCT) {
+		const newInventory: StoreProductInterface[] = [...state.inventory];
+		const itemIndex = newInventory.findIndex((item) => {
+			return (
+				item.store === action.payload.store &&
+				item.model === action.payload.model
+			);
+		});
+
+		if (newInventory[itemIndex]) {
+			newInventory[itemIndex].inventory = action.payload.inventory;
+		} else {
+			newInventory.push(action.payload);
+		}
+
+		return { ...state, inventory: newInventory };
+	} else {
+		return state;
 	}
 }
 
-const storeContext = createContext({});
+export const storeContext = createContext<StoreContextInterface | null>(null);
 
 export default function StoreProvider({
 	children,
@@ -42,8 +64,8 @@ export default function StoreProvider({
 	const [state, dispatch] = useReducer(storeReducer, { inventory: [] });
 
 	return (
-		<storeContext.Provider value={{ ...state, dispatch }}>
-			{children}
+		<storeContext.Provider value={{ state, dispatch }}>
+			<WS>{children}</WS>
 		</storeContext.Provider>
 	);
 }

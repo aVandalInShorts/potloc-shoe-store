@@ -1,0 +1,11 @@
+[
+	{
+		"SHOP": {
+			"TITLE": "Boutique",
+			"ITEMS": {
+				"SHOPS-LIST": "Liste des boutiques",
+				"ADD-TO-CART": "Ajouter au panier"
+			}
+		}
+	}
+]
