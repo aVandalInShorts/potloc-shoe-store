@@ -1,17 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	i18n: {
-		locales: ["en", "fr"],
-    defaultLocale: "en",
-  },
+		locales: ["fr", "en"],
+		defaultLocale: "fr",
+		localeDetection: false,
+	},
 	webpack(config) {
 		config.module.rules.push({
-      test: /\.svg$/,
-      use: ["@svgr/webpack"],
-    });
+			test: /\.svg$/,
+			use: ["@svgr/webpack"],
+		});
 
-    return config;
-	}
+		return config;
+	},
 };
 
 export default nextConfig;
