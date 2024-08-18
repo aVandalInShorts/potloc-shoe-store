@@ -5,6 +5,7 @@ import "./globals.css";
 import { LocaleProvider } from "@/i18n/i18n";
 import Header from "@/views/Header/Header";
 import StoreProvider from "@/store/Store";
+import Cart from "@/views/Cart/Cart";
 
 const roboto = Roboto({
 	subsets: ["latin"],
@@ -33,6 +34,7 @@ export default function RootLayout({
 					<body className={roboto.className}>
 						<Header />
 						{children}
+						<Cart />
 					</body>
 				</html>
 			</LocaleProvider>

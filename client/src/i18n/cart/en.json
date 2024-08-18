@@ -1,0 +1,17 @@
+[
+	{
+		"CART": {
+			"TITLE": "Cart",
+			"EMPTY": "Your cart is empty",
+			"SUBTOTAL": "Total",
+			"TAX": "Tax",
+			"TOTAL": "Total",
+			"BUY": "Buy",
+			"PRODUCT": {
+				"QUANTITY": "Quantity",
+				"PRICE": "Price",
+				"TOTAL": "Total"
+			}
+		}
+	}
+]

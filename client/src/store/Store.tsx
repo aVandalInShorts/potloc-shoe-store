@@ -4,6 +4,7 @@ import React, { createContext, useContext, useReducer } from "react";
 import WS from "./WS";
 
 interface StoreStateInterface {
+	isCartOpen: boolean;
 	inventory: StoreProductInterface[];
 }
 
@@ -15,6 +16,7 @@ export interface StoreProductInterface {
 
 export enum StoreActionTypesEnum {
 	SET_PRODUCT = "SET_PRODUCT",
+	SET_CART_OPEN = "SET_CART_OPEN",
 }
 
 interface SetProductAction {
@@ -22,7 +24,12 @@ interface SetProductAction {
 	payload: StoreProductInterface;
 }
 
-type StoreActionType = SetProductAction;
+interface SetCartOpenAction {
+	type: StoreActionTypesEnum.SET_CART_OPEN;
+	payload: boolean;
+}
+
+type StoreActionType = SetProductAction | SetCartOpenAction;
 
 interface StoreContextInterface {
 	state: StoreStateInterface;
@@ -49,10 +56,14 @@ function storeReducer(
 		}
 
 		return { ...state, inventory: newInventory };
+	} else if (action.type === StoreActionTypesEnum.SET_CART_OPEN) {
+		return { ...state, isCartOpen: action.payload };
 	} else {
 		return state;
 	}
 }
+
+const initialState: StoreStateInterface = { isCartOpen: false, inventory: [] };
 
 export const storeContext = createContext<StoreContextInterface | null>(null);
 
@@ -61,7 +72,7 @@ export default function StoreProvider({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	const [state, dispatch] = useReducer(storeReducer, { inventory: [] });
+	const [state, dispatch] = useReducer(storeReducer, initialState);
 
 	return (
 		<storeContext.Provider value={{ state, dispatch }}>

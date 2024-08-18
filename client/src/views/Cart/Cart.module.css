@@ -1,0 +1,95 @@
+.modal {
+	--modal-padding: 30px;
+
+	inset: 0 0 0 auto;
+	height: 100vh;
+	max-height: none;
+	max-width: none;
+	z-index: 30;
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+	width: min(350px, 100%);
+	border: 0px solid var(--color-black);
+	border-left-width: 1px;
+	padding: 0;
+	translate: 100%;
+	transition: translate 400ms ease-in-out, display 400ms allow-discrete,
+		overlay 400ms allow-discrete;
+
+	&::backdrop {
+		opacity: 0;
+		background-color: rgba(0, 0, 0, 0.75);
+		backdrop-filter: blur(0.25rem);
+		/* Using animation because "transition" isn't working for the fadein for the backdrop */
+		animation: backdrop-fade-out 400ms ease-in-out forwards;
+	}
+
+	&[open] {
+		translate: 0;
+
+		&::backdrop {
+			animation: backdrop-fade-in 400ms ease-in-out forwards;
+		}
+	}
+}
+
+.title-ctn,
+.items,
+.summary {
+	padding: var(--modal-padding);
+}
+
+.title-ctn {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 15px;
+	padding-bottom: var(--modal-padding);
+	border-bottom: 1px solid var(--color-black);
+}
+
+.title {
+}
+
+.items {
+	overflow-y: auto;
+}
+
+.summary {
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: flex-end;
+	border-top: 1px solid var(--color-black);
+}
+
+.summary-list {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr auto;
+	gap: 5px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid var(--color-black);
+	margin-bottom: 20px;
+
+	& span:nth-child(2n + 1) {
+		font-weight: 500;
+	}
+}
+
+@keyframes backdrop-fade-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes backdrop-fade-out {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
