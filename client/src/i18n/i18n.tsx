@@ -1,3 +1,5 @@
+"use client";
+
 import rosetta from "rosetta";
 import headerFr from "./header/fr.json";
 import headerEn from "./header/en.json";
@@ -7,6 +9,7 @@ import homepageEn from "./homepage/en.json";
 
 import shopFr from "./shop/fr.json";
 import shopEn from "./shop/en.json";
+import { createContext, ReactNode, useContext, useState } from "react";
 
 export const i18n = rosetta({
 	fr: {},
@@ -27,3 +30,29 @@ i18n.set("en", shopEn[0]);
 
 // Default language. To be defined asynchronously by Next
 i18n.locale("fr");
+
+interface LocaleContextProps {
+	locale: string;
+	setLocale: (locale: string) => void;
+}
+
+const LocaleContext = createContext<LocaleContextProps | undefined>(undefined);
+
+export const LocaleProvider = ({ children }: { children: ReactNode }) => {
+	const [locale, setLocale] = useState("fr");
+
+	const changeLocale = (newLocale: string) => {
+		i18n.locale(newLocale);
+		setLocale(newLocale);
+	};
+
+	return (
+		<LocaleContext.Provider value={{ locale, setLocale: changeLocale }}>
+			{children}
+		</LocaleContext.Provider>
+	);
+};
+
+export const useLocale = () => {
+	return useContext(LocaleContext);
+};

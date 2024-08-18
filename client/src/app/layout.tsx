@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 
-import { i18n } from "../i18n/i18n";
-import Header from "../views/Header/Header";
+import { LocaleProvider } from "@/i18n/i18n";
+import Header from "@/views/Header/Header";
 import StoreProvider from "@/store/Store";
 
 const roboto = Roboto({
@@ -27,13 +27,15 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang={i18n.locale()}>
-			<body className={roboto.className}>
-				<StoreProvider>
-					<Header />
-					{children}
-				</StoreProvider>
-			</body>
-		</html>
+		<StoreProvider>
+			<LocaleProvider>
+				<html lang="fr">
+					<body className={roboto.className}>
+						<Header />
+						{children}
+					</body>
+				</html>
+			</LocaleProvider>
+		</StoreProvider>
 	);
 }

@@ -3,16 +3,19 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import styles from "./Header.module.css";
-import { i18n } from "@/i18n/i18n";
+import { i18n, useLocale } from "@/i18n/i18n";
 import Logo from "@/svg/logo.svg";
 
 export default function Header() {
 	const [currLanguage, setCurrLanguage] = useState("fr");
+	const local = useLocale();
 
 	const handleLanguageChange = () => {
-		// const newLocale = i18n.locale() === "fr" ? "en" : "fr";
-		// i18n.locale(newLocale);
-		// setOtherLanguage(newLocale === "fr" ? "en" : "fr");
+		const newLocale = i18n.locale() === "fr" ? "en" : "fr";
+		i18n.locale(newLocale);
+		local?.setLocale(newLocale);
+		setCurrLanguage(newLocale);
+		console.log("Language changed to", newLocale);
 	};
 
 	return (
@@ -23,19 +26,11 @@ export default function Header() {
 				</Link>
 
 				<nav className={styles.nav}>
-					<Link href="/" locale={currLanguage}>
-						{i18n.t("HEADER.HOMEPAGE")}
-					</Link>
-					<Link href="/shop" locale={currLanguage}>
-						{i18n.t("HEADER.SHOP")}
-					</Link>
-					<Link
-						href="/"
-						onClick={handleLanguageChange}
-						locale={currLanguage === "fr" ? "en" : "fr"}
-					>
+					<Link href="/">{i18n.t("HEADER.HOMEPAGE")}</Link>
+					<Link href="/shop">{i18n.t("HEADER.SHOP")}</Link>
+					<button type="button" onClick={handleLanguageChange}>
 						{currLanguage === "fr" ? "EN" : "FR"}
-					</Link>
+					</button>
 				</nav>
 			</div>
 		</header>
