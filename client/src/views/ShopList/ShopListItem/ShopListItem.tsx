@@ -1,6 +1,7 @@
 import { i18n } from "@/i18n/i18n";
 import React from "react";
 import styles from "./ShopListItem.module.css";
+import { StoreActionTypesEnum, useStoreContext } from "@/store/Store";
 
 export interface ShopListItemProps {
 	model: string;
@@ -11,6 +12,19 @@ export interface ShopListItemProps {
 }
 
 export default function ShopListItem(props: ShopListItemProps) {
+	const store = useStoreContext();
+
+	const handleAddToCart = () => {
+		store?.dispatch({
+			type: StoreActionTypesEnum.ADD_CART_PRODUCT,
+			payload: props.model,
+		});
+		store?.dispatch({
+			type: StoreActionTypesEnum.SET_CART_OPEN,
+			payload: true,
+		});
+	};
+
 	return (
 		<article className={styles.item}>
 			<div>
@@ -39,6 +53,7 @@ export default function ShopListItem(props: ShopListItemProps) {
 					type="button"
 					className="button"
 					data-text={i18n.t("SHOP.ITEMS.ADD-TO-CART")}
+					onClick={handleAddToCart}
 				>
 					{i18n.t("SHOP.ITEMS.ADD-TO-CART")}
 				</button>

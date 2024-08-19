@@ -1,14 +1,17 @@
 "use client";
 
 import { i18n } from "@/i18n/i18n";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Cart.module.css";
 import Close from "@/svg/close.svg";
 import { StoreActionTypesEnum, useStoreContext } from "@/store/Store";
+import CartItem from "./CartItem/CartItem";
 
 export default function Cart() {
 	const modalRef = React.useRef<HTMLDialogElement>(null);
 	const store = useStoreContext();
+	const [price, setPrice] = useState<number>(0);
+	const [tax, setTax] = useState<number>(0);
 
 	useEffect(() => {
 		if (store?.state.isCartOpen) {
@@ -16,11 +19,21 @@ export default function Cart() {
 		} else {
 			modalRef.current?.close();
 		}
-		console.log("Cart is open:", store?.state.isCartOpen);
 	}, [store?.state.isCartOpen]);
 
+	useEffect(() => {
+		setPrice(
+			store?.state.cart
+				? store?.state.cart
+						.map((item) => item.quantity * 10)
+						.reduce((a, b) => a + b, 0)
+				: 0
+		);
+
+		setTax(price * 0.05 + price * 1.05 * 0.09975);
+	}, [store?.state.cart, price]);
+
 	const handleModalClose = () => {
-		console.log("CLOOOOSE");
 		store?.dispatch({
 			type: StoreActionTypesEnum.SET_CART_OPEN,
 			payload: false,
@@ -35,6 +48,16 @@ export default function Cart() {
 		}
 	};
 
+	const items = store?.state.cart.map((item, index) => {
+		return (
+			<CartItem
+				key={item.model + "-" + index}
+				model={item.model}
+				quantity={item.quantity}
+			/>
+		);
+	});
+
 	return (
 		<dialog
 			className={styles.modal}
@@ -47,15 +70,24 @@ export default function Cart() {
 					<Close />
 				</button>
 			</div>
-			<div className={styles.items}>{i18n.t("CART.EMPTY")}</div>
+			<div className={styles.items}>
+				{store?.state.cart.length === 0 && i18n.t("CART.EMPTY")}
+				{items}
+			</div>
 			<div className={styles.summary}>
 				<div className={styles["summary-list"]}>
+					{/* The prices here are fictional and are simple here to add dynamism */}
 					<span>{i18n.t("CART.SUBTOTAL")}</span>
-					<span>0.00$</span>
+					<span>{(items?.length ? price : 0).toFixed(2)}$</span>
 					<span>{i18n.t("CART.TAX")}</span>
-					<span>0.00$</span>
+					<span>{(items?.length ? tax : 0).toFixed(2)}$</span>
 					<span>{i18n.t("CART.TOTAL")}</span>
-					<span>0.00$</span>
+					<span>
+						{items?.length
+							? (price + (items?.length ? tax : 0)).toFixed(2)
+							: 0}
+						$
+					</span>
 				</div>
 				<button type="button" className="button">
 					{i18n.t("CART.BUY")}

@@ -10,7 +10,8 @@
 			"PRODUCT": {
 				"QUANTITY": "Quantité",
 				"PRICE": "Prix",
-				"TOTAL": "Total"
+				"TOTAL": "Total",
+				"REMOVE": "Enlever"
 			}
 		}
 	}
