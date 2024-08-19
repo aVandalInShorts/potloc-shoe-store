@@ -1,3 +1,7 @@
+.header {
+	height: var(--header-height);
+}
+
 .ctn {
 	display: flex;
 	justify-content: space-between;
