@@ -4,11 +4,10 @@ import { StoreActionTypesEnum, useStoreContext } from "./Store";
 export default function WS({
 	children,
 }: Readonly<{ children: React.ReactNode }>) {
-	const ws = new WebSocket("ws://localhost:8080/");
 	const store = useStoreContext();
 
 	useEffect(() => {
-		console.info("WS mounted");
+		const ws = new WebSocket("ws://localhost:8080/");
 		ws.onmessage = (event) => {
 			store?.dispatch({
 				type: StoreActionTypesEnum.SET_PRODUCT,

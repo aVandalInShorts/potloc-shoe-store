@@ -79,7 +79,7 @@ export default function Cart() {
 			onClick={handleOutsideClick}
 		>
 			<div className={styles["title-ctn"]}>
-				<h3 className={styles.title}>{i18n.t("CART.TITLE")}</h3>
+				<h3>{i18n.t("CART.TITLE")}</h3>
 				<button type="button" onClick={handleModalClose}>
 					<Close />
 				</button>

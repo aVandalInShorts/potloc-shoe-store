@@ -18,7 +18,6 @@ export default function Header() {
 		i18n.locale(newLocale);
 		local?.setLocale(newLocale);
 		setCurrLanguage(newLocale);
-		console.log("Language changed to", newLocale);
 	};
 
 	const handleCartOpen = () => {
@@ -29,7 +28,7 @@ export default function Header() {
 	};
 
 	return (
-		<header className={styles.header}>
+		<header>
 			<div className={styles.ctn}>
 				<Link href="/" className={styles.logo}>
 					<Logo />
