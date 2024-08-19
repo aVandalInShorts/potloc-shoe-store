@@ -6,6 +6,7 @@ import styles from "./Cart.module.css";
 import Close from "@/svg/close.svg";
 import { StoreActionTypesEnum, useStoreContext } from "@/store/Store";
 import CartItem from "./CartItem/CartItem";
+import axios from "axios";
 
 export default function Cart() {
 	const modalRef = React.useRef<HTMLDialogElement>(null);
@@ -45,6 +46,19 @@ export default function Cart() {
 	) => {
 		if (e.target === modalRef.current) {
 			handleModalClose();
+		}
+	};
+
+	const handleCartSubmit = async () => {
+		const cart = store?.state.cart.map((item) => {
+			return { model: item.model, quantity: item.quantity };
+		});
+
+		try {
+			const response = await axios.post("/api/cart", { cart });
+			console.log("Cart submitted", response.data);
+		} catch (error) {
+			console.error("Failed to submit cart", error);
 		}
 	};
 
@@ -89,7 +103,11 @@ export default function Cart() {
 						$
 					</span>
 				</div>
-				<button type="button" className="button">
+				<button
+					type="button"
+					className="button"
+					onClick={handleCartSubmit}
+				>
 					{i18n.t("CART.BUY")}
 				</button>
 			</div>
