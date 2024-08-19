@@ -1,0 +1,7 @@
+.html-disable-scroll {
+	overflow-x: auto;
+}
+
+.disable-scroll {
+	overflow-y: hidden;
+}

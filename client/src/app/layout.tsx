@@ -1,16 +1,9 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
 import "./globals.css";
 
 import { LocaleProvider } from "@/i18n/i18n";
-import Header from "@/views/Header/Header";
 import StoreProvider from "@/store/Store";
-import Cart from "@/views/Cart/Cart";
-
-const roboto = Roboto({
-	subsets: ["latin"],
-	weight: ["300", "400", "500", "700", "900"],
-});
+import Body from "@/views/Body/Body";
 
 export const metadata: Metadata = {
 	title: "Potloc technical test",
@@ -30,13 +23,7 @@ export default function RootLayout({
 	return (
 		<StoreProvider>
 			<LocaleProvider>
-				<html lang="fr">
-					<body className={roboto.className}>
-						<Header />
-						{children}
-						<Cart />
-					</body>
-				</html>
+				<Body>{children}</Body>
 			</LocaleProvider>
 		</StoreProvider>
 	);
