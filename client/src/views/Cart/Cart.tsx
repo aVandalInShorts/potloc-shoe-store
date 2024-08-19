@@ -97,9 +97,7 @@ export default function Cart() {
 					<span>{(items?.length ? tax : 0).toFixed(2)}$</span>
 					<span>{i18n.t("CART.TOTAL")}</span>
 					<span>
-						{items?.length
-							? (price + (items?.length ? tax : 0)).toFixed(2)
-							: 0}
+						{items?.length ? (price + (items?.length ? tax : 0)).toFixed(2) : 0}
 						$
 					</span>
 				</div>
@@ -107,6 +105,7 @@ export default function Cart() {
 					type="button"
 					className="button"
 					onClick={handleCartSubmit}
+					data-text={i18n.t("CART.BUY")}
 				>
 					{i18n.t("CART.BUY")}
 				</button>
